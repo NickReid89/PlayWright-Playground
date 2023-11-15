@@ -12,7 +12,7 @@
 import { test, expect } from '@playwright/test';
 
 const user = process.env.GITHUB_USER;
-const repo = 'PlayWright-Playground';
+const repo = 'Test-repo-1';
 
 test.use({
   baseURL: 'https://api.github.com',
