@@ -9,6 +9,12 @@ export default defineConfig({
       // Add authorization token to all requests.
       // Assuming personal access token available in the environment.
       'Authorization': `token ${process.env.API_TOKEN}`,
+
+      "baseUrl": "https://example.com",
+      "username": "your_username",
+      "password": "your_password"
     },
   }
 });
+
+
