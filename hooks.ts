@@ -1,6 +1,7 @@
 // hooks.ts
 
 import { test, expect } from '@playwright/test';
+import * as config from './config.json';
 
 export const setup = async () => {
   // Perform setup tasks before the test suite runs
@@ -16,7 +17,7 @@ export const beforeEachTest = async ({ page }) => {
   // Perform tasks before each test runs
   console.log('Setup tasks before each test');
   // For example, navigate to a common page before each test
-  await page.goto('https://example.com');
+  await page.goto(config.baseUrl);
 };
 
 export const afterEachTest = async ({ page }) => {
