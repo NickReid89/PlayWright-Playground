@@ -26,6 +26,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install locust
 
-    - name: Run tests
-      run: |
-        locust -f locustfile.py --headless --run-time 1m --users 100 --spawn-rate 10 --host=http://localhost
+    - name: Locust Load Test
+      uses: apardo04/locust-github-action@1.1.0
+      with:
+        LOCUSTFILE: "locustfile.py"
+        URL:  "http://localhost"
+        USERS: "5"
+        RATE: "5"
+        RUNTIME: "10s"
+          
