@@ -28,3 +28,4 @@ jobs:
     - name: Run tests
       run: |
         locust -f locustfile.py --headless --run-time 1m --users 100 --spawn-rate 10 --host=http://localhost
+        sleep 10s
