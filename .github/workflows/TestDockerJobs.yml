@@ -4,20 +4,13 @@ on:
   workflow_dispatch:
   
 jobs:
-  run-httpbin:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Run httpbin Docker image
-      run: |
-        docker run -d --name httpbin kennethreitz/httpbin
-
   run-tests:
-    needs: run-httpbin
     runs-on: ubuntu-latest
+    services:
+      httpbin:
+        image: kennethreitz/httpbin
+        ports:
+          - 80:80
 
     steps:
     - name: Checkout
@@ -35,16 +28,4 @@ jobs:
 
     - name: Run tests
       run: |
-        locust -f locustfile.py --headless --run-time 1m --users 100 --spawn-rate 10
-
-  kill-httpbin:
-    needs: run-tests
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Kill httpbin Docker image
-      run: |
-        docker stop httpbin
+        locust -f locustfile.py --headless --run-time 1m --users 100 --spawn-rate 10 --host=http://localhost
