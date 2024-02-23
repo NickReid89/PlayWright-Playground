@@ -16,12 +16,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Locust Load Test
-      uses: apardo04/locust-github-action@1.1.0
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-        LOCUSTFILE: "locustfile.py"
-        URL:  "http://localhost"
-        USERS: "5"
-        RATE: "5"
-        RUNTIME: "10s"
-          
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install locust
+    - name: Run tests
+      run: |
+        locust -f locustfile.py --headless --run-time 1m --users 100 --spawn-rate 10 --host=http://localhost
