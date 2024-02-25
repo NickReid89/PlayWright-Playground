@@ -6,9 +6,9 @@ export let options = {
         executor: 'ramping-vus',
         startVUs: 0,
         stages: [
-          { duration: '2m', target: 100 }, // ramp up to 100 VUs in 2 minutes
-          { duration: '5m', target: 100 }, // stay at 100 VUs for 5 minutes
-          { duration: '2m', target: 0 },   // ramp down to 0 VUs in 2 minutes
+          { duration: '1m', target: 1 }, // ramp up to 100 VUs in 2 minutes
+          // { duration: '5m', target: 100 }, // stay at 100 VUs for 5 minutes
+          // { duration: '2m', target: 0 },   // ramp down to 0 VUs in 2 minutes
         ],
         gracefulRampDown: '1m',
       },
@@ -16,12 +16,12 @@ export let options = {
   };
 
 export default function () {
-  http.get(`http://localhost/get`);
-  http.get(`http://localhost/get/status/200`);
-  const params = {
-    headers: {
-      'Accept': 'image/png'
-    },
-  };
-  http.get(`http://localhost/get/image`, params);
+  http.get(`http://127.0.0.1/get`);
+  // http.get(`http://localhost/get/status/200`);
+  // const params = {
+  //   headers: {
+  //     'Accept': 'image/png'
+  //   },
+  // };
+  // http.get(`http://localhost/get/image`, params);
 }
