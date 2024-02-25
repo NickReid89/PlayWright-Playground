@@ -4,6 +4,11 @@ import { check } from 'k6';
 
 const failRate = new Rate('failed_requests');
 const requestDuration = new Trend('request_duration');
+const params = {
+  headers: {
+    'Accept': 'image/png'
+  },
+};
 
 export let options = {
   scenarios: {
@@ -29,19 +34,14 @@ check(result, {
 });
 failRate.add(result.status !== 200);
 
-result = http.get("http://httpbin/get/status/200");
+result = http.get("http://httpbin/status/200");
 requestDuration.add(result.timings.duration);
 check(result, {
   'http response status code is 200': result.status === 200,
 });
 failRate.add(result.status !== 200);
-const params = {
-  headers: {
-    'Accept': 'image/png'
-  },
-};
 
-result = http.get("http://httpbin/get/image", params);
+result = http.get("http://httpbin/image", params);
 requestDuration.add(result.timings.duration);
 check(result, {
   'http response status code is 200': result.status === 200,
