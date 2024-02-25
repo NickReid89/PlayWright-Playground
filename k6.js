@@ -16,12 +16,12 @@ export let options = {
   };
 
 export default function () {
-  http.get('${BASE_URL}/get');
-  http.get("${BASE_URL}/get/status/200");
+  http.get('${__ENV.BASE_URL}/get');
+  http.get("${__ENV.BASE_URL}/get/status/200");
   const params = {
     headers: {
       'Accept': 'image/png'
     },
   };
-  http.get("${BASE_URL}/get/image", params);
+  http.get("${__ENV.BASE_URL}/get/image", params);
 }
