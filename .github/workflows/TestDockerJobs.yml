@@ -1,4 +1,4 @@
-name: Test Job Communication
+name: Locust
 
 on:
   workflow_dispatch:
