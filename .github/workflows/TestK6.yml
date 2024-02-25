@@ -23,4 +23,3 @@ jobs:
           with:
             cloud: false
             filename: k6.js
-            flags: --vus 1 --duration 10s
