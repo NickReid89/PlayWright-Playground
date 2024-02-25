@@ -18,6 +18,4 @@ jobs:
         - name: Run local k6 test
           uses: grafana/k6-action@v0.3.1
           with:
-            filename: k6.js
-          env:
-            BASE_URL: "http://127.0.0.1:80"        
+            filename: k6.js    
