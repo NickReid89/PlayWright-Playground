@@ -20,4 +20,4 @@ jobs:
           with:
             filename: k6.js
           env:
-            BASE_URL: "http://127.0.0.1"        
+            BASE_URL: "http://127.0.0.1:80"        
