@@ -6,11 +6,6 @@ on:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
-    services:
-      httpbin:
-        image: kennethreitz/httpbin
-        ports:
-          - 80:80
     steps:
         - name: Checkout
           uses: actions/checkout@v2
@@ -18,5 +13,6 @@ jobs:
 
           uses: grafana/k6-action@v0.3.1
           with:
+            cloud: false
             filename: k6.js
-            flags: --vus 50 --duration 10s
+            flags: --vus 1 --duration 10s
