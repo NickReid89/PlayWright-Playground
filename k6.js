@@ -1,4 +1,9 @@
 import http from 'k6/http';
+import { Rate, Trend } from 'k6/metrics';
+import { check } from 'k6';
+
+const failRate = new Rate('failed_requests');
+const requestDuration = new Trend('request_duration');
 
 export let options = {
   scenarios: {
@@ -16,12 +21,31 @@ export let options = {
 };
 
 export default function () {
-http.get('http://httpbin/get');
-http.get("http://httpbin/get/status/200");
+  
+result = http.get('http://httpbin/get');
+requestDuration.add(result.timings.duration);
+check(result, {
+  'http response status code is 200': result.status === 200,
+});
+failRate.add(result.status !== 200);
+
+result = http.get("http://httpbin/get/status/200");
+requestDuration.add(result.timings.duration);
+check(result, {
+  'http response status code is 200': result.status === 200,
+});
+failRate.add(result.status !== 200);
 const params = {
   headers: {
     'Accept': 'image/png'
   },
 };
-http.get("http://httpbin/get/image", params);
+
+result = http.get("http://httpbin/get/image", params);
+requestDuration.add(result.timings.duration);
+check(result, {
+  'http response status code is 200': result.status === 200,
+});
+failRate.add(result.status !== 200);
+
 }
