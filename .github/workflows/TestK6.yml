@@ -14,8 +14,9 @@ jobs:
     steps:
         - name: Checkout
           uses: actions/checkout@v2
+        - name: Run k6 local test
 
-        - name: Run local k6 test
           uses: grafana/k6-action@v0.3.1
           with:
-            filename: k6.js    
+            filename: k6.js
+            flags: --vus 50 --duration 10s
