@@ -21,8 +21,8 @@ export let options = {
 };
 
 export default function () {
-  
-result = http.get('http://httpbin/get');
+
+let result = http.get('http://httpbin/get');
 requestDuration.add(result.timings.duration);
 check(result, {
   'http response status code is 200': result.status === 200,
