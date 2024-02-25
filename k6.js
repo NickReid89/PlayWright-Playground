@@ -18,7 +18,7 @@ export const options = {
 };
 
 export default function () {
-  const result = http.get('http://localhost/get');
+  const result = http.get('http://httpbin/get');
   check(result, {
     'http response status code is 200': result.status === 200,
   });
